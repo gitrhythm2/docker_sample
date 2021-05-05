@@ -1,11 +1,11 @@
 ## 概要
 centOS8にhomebrewを構築した`gitrhythm/centos8_brew:latest`をベースとして、rbenvでRuby環境を構築する。
 
-## このサンプルで学んだこと
-
+## 参考
 
 - [github - rbenv](https://github.com/rbenv/rbenv#understanding-path)
 - [RubyをHomebrewのrbenvでインストールする手順](https://weblabo.oscasierra.net/ruby-install-rbenv-homebrew-macos/)
+
 
 ## このサンプルで学んだこと
 環境変数の設定などは、RUNが別れていると引き継がれない.
