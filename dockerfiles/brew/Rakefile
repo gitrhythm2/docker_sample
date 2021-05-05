@@ -1,5 +1,5 @@
 
-repo = 'gitrhythm/brew:0.1'
+repo = 'gitrhythm/centos8_brew:latest'
 container = 'brew'
 
 task default: :b   # build
