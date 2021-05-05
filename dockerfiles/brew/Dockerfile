@@ -3,7 +3,6 @@ FROM centos:8
 
 ENV USER linuxbrew
 ENV HOME /home/linuxbrew
-ENV PATH /home/${USER}/.linuxbrew/bin:$PATH
 
 # 基本的な開発環境構築
 RUN yum -y groupinstall 'Development Tools' && \
@@ -11,7 +10,8 @@ RUN yum -y groupinstall 'Development Tools' && \
     adduser ${USER} && \
     echo "${USER}:hoge" | chpasswd && \
     usermod -G wheel ${USER} && \
-    echo "${USER} ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
+    echo "${USER} ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers && \
+    echo "alias l='ls -alF'" >> .bashrc
 
 # ユーザーとホームディレクトリを変更
 USER ${USER}
@@ -21,9 +21,8 @@ WORKDIR ${HOME}
 RUN git clone https://github.com/Homebrew/brew /home/${USER}/.linuxbrew/Homebrew && \
     mkdir /home/${USER}/.linuxbrew/bin && \
     ln -s /home/${USER}/.linuxbrew/Homebrew/bin/brew /home/${USER}/.linuxbrew/bin && \
-    eval $(/home/${USER}/.linuxbrew/bin/brew shellenv) && \
-    echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile && \
-    echo "alias l='ls -alF'" >> .bashrc && \
-    brew doctor
+    echo "eval $(/home/${USER}/.linuxbrew/bin/brew shellenv)" >>~/.bash_profile
 
-RUN brew install git
+RUN eval $(/home/${USER}/.linuxbrew/bin/brew shellenv) && \
+    brew doctor && \
+    brew install git
