@@ -20,4 +20,4 @@ $ docker exec -it #{container} /bin/bash          # これだと.bash_p路ふぃ
 $ docker exec -it #{container} /bin/bash --login  # --loginを付与すると読み込む
 ```
 
-- ```ENV PATH /home/${USER}/.linuxbrew/bin:$PATH```をDockerfileに定義しているが、これがないと`brew doctor`の部分でbrewを参照できなくてエラーになる(他に良い方法がありそうな気もするが、今は追求していない)
+- `ENV PATH /home/${USER}/.linuxbrew/bin:$PATH`をDockerfileに定義しているが、これがないと`brew doctor`の部分でbrewを参照できなくてエラーになる(他に良い方法がありそうな気もするが、今は追求していない)

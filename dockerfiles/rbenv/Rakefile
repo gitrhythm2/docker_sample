@@ -1,0 +1,78 @@
+
+repo = 'gitrhythm/centos8_brew_rbenv:latest'
+container = 'rbenv'
+
+task default: :b   # build
+
+### イメージ操作系 ###
+
+# build
+desc "docker build -t #{repo} ."
+task :b do
+  unless image_created?(repo)
+    puts 'イメージをビルドしています'
+    system "docker build -t #{repo} ."
+  end
+end
+
+# clean
+desc "docker image rm #{repo}"
+task clean: :stop do
+  if container_created?(container)
+    puts 'コンテナを削除しています'
+    system "docker container rm #{container}"
+  end
+
+  if image_created?(repo)
+    puts 'イメージを削除しています'
+    system "docker image rm #{repo}"
+  end
+end
+
+### コンテナ操作系 ###
+
+# start
+desc "docker create and start"
+task start: :b do
+  unless container_created?(container)
+    puts 'コンテナを作成しています'
+    system "docker container create -it --name #{container} #{repo}"
+  end
+
+  unless container_running?(container)
+    puts 'コンテナを起動しています'
+    system "docker container start #{container}"
+  end
+end
+
+# stop
+desc "docker container stop #{container}"
+task :stop do
+  if container_running?(container)
+    puts 'コンテナを停止しています'
+    system "docker container stop #{container}"
+  end
+end
+
+# login
+desc "docker exec -it #{container} /bin/bash"
+task login: [:b, :start] do
+  system "docker exec -it #{container} /bin/bash --login"
+end
+
+# helpers
+
+def image_created?(repo)
+  result = `docker image ls #{repo} | tail -n +2`
+  !result.empty?
+end
+
+def container_created?(container)
+  result = `docker container ps -a | grep #{container}`
+  !result.empty?
+end
+
+def container_running?(container)
+  result = `docker container ps | grep #{container}`
+  !result.empty?
+end
