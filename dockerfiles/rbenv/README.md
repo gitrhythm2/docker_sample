@@ -1,11 +1,33 @@
 ## 概要
 centOS8にhomebrewを構築した`gitrhythm/centos8_brew:latest`をベースとして、rbenvでRuby環境を構築する。
 
-## 参考
+## このサンプルで学んだこと
+
 
 - [github - rbenv](https://github.com/rbenv/rbenv#understanding-path)
 - [RubyをHomebrewのrbenvでインストールする手順](https://weblabo.oscasierra.net/ruby-install-rbenv-homebrew-macos/)
 
+## このサンプルで学んだこと
+環境変数の設定などは、RUNが別れていると引き継がれない.
+```
+# 1つ目
+RUN ... && \
+    'eval "$(rbenv init -)"'
+
+# 2つ目
+RUN ...
+```
+この時2つ目では、1つ目で設定した`eval...`が引き継がれない
+RUNをまとめて1つにするか、2つ目でも改めて`eval...`を実行する
+```
+# 1つ目
+RUN ... && \
+    'eval "$(rbenv init -)"'
+
+# 2つ目
+RUN ... && \
+    'eval "$(rbenv init -)"'
+```
 
 ## 作業ログ
 Dockerfile作成に先立ち、手動でRuby環境を構築してみたメモ。
@@ -28,7 +50,8 @@ OpenSSL <1.1.
 OpenSSLに関するメッセージが表示されていたので、言われた通りにしてみる
 ついでにrbenv initの指定もしておく
 ```
-$ echo export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)" > .bash_profile
+$ sudo yum install -y openssl-devel
+$ echo export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)" >> .bash_profile
 $ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 ```
 
