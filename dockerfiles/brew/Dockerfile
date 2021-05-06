@@ -3,6 +3,7 @@ FROM centos:8
 
 ENV USER linuxbrew
 ENV HOME /home/linuxbrew
+ENV PATH /home/${USER}/.linuxbrew/bin:$PATH
 
 # 基本的な開発環境構築
 RUN yum -y groupinstall 'Development Tools' && \
