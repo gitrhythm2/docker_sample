@@ -5,6 +5,8 @@ ENV USER linuxbrew
 ENV HOME /home/linuxbrew
 ENV PATH /home/${USER}/.linuxbrew/bin:$PATH
 
+SHELL ["/bin/bash", "-c"]
+
 # 基本的な開発環境構築
 RUN apt-get update && \
     apt-get upgrade && \

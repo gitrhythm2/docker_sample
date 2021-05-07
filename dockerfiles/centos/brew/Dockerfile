@@ -5,6 +5,8 @@ ENV USER linuxbrew
 ENV HOME /home/linuxbrew
 ENV PATH /home/${USER}/.linuxbrew/bin:$PATH
 
+SHELL ["/bin/bash", "-c"]
+
 # 基本的な開発環境構築
 RUN yum -y groupinstall 'Development Tools' && \
     yum -y install procps-ng curl file git sudo && \

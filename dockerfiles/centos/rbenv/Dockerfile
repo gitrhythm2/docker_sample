@@ -1,9 +1,7 @@
 
 FROM gitrhythm/centos8_brew:latest
 
-# gitrhythm/centos8_brewから引き継いだ環境
-# USER linuxbrew
-# HOME /home/linuxbrew
+SHELL ["/bin/bash", "-c"]
 
 # rubyenvのインストール
 RUN brew install rbenv && \

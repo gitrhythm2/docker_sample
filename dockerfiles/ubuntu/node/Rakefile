@@ -1,6 +1,6 @@
 
-repo = 'gitrhythm/ubuntu_brew:latest'
-container = 'brew'
+repo = 'gitrhythm/ubuntu_node:latest'
+container = 'node'
 
 task default: :b   # build
 
