@@ -1,0 +1,6 @@
+{
+  "name": "Node basic project",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "node",
+  "workspaceFolder": "/work"
+}

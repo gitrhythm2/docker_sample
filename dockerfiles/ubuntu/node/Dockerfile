@@ -11,4 +11,4 @@ RUN brew install nodenv && \
 RUN eval "$(nodenv init -)" && \
     curl -fsSL https://github.com/nodenv/nodenv-installer/raw/master/bin/nodenv-doctor | bash && \
     nodenv install 16.1.0 && \
-    nodenv local 16.1.0
+    nodenv global 16.1.0
