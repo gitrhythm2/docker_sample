@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-c"]
 # 基本的な開発環境構築
 RUN apt-get update && \
     apt-get upgrade && \
-    apt-get -y install build-essential procps curl file git sudo
+    apt-get -y install build-essential procps curl file git sudo vim
 
 RUN useradd -m ${USER} && \
     echo "${USER}:hoge" | chpasswd && \

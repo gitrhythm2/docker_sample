@@ -1,0 +1,16 @@
+version: '3'
+services:
+  golang:
+    build: .
+    container_name: 'golang'
+    stdin_open: true
+    tty: true
+    working_dir: '/work'
+    volumes:
+      - ..:/work
+      - /work/.devcontainer
+    command: /bin/bash
+
+# docker compose up
+# docker compose stop
+# docker compose run ruby /bin/bash --login
